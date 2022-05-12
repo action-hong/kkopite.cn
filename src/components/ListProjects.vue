@@ -18,7 +18,8 @@ defineProps<{ projects: Record<string, any[]> }>()
         :title="item.name"
       >
         <div v-if="item.icon" class="pt-2 pr-5">
-          <div class="text-3xl opacity-50" :class="item.icon || 'i-carbon-unknown'" />
+          <Unocss v-if="item.icon === 'unocss'" class="text-4xl opacity-50" />
+          <div v-else class="text-3xl opacity-50" :class="item.icon || 'i-carbon-unknown'" />
         </div>
         <div class="flex-auto">
           <div cla ss="text-normal">{{ item.name }}</div>

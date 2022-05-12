@@ -32,7 +32,7 @@ async function buildBlogRSS() {
     description: 'kkopite\' Blog',
     id: DOMAIN,
     link: DOMAIN,
-    copyright: 'CC BY-NC-SA 4.0 2021 © kkopite',
+    copyright: 'CC BY-NC-SA 4.0 2022 © kkopite',
     feedLinks: {
       json: `${DOMAIN}/feed.json`,
       atom: `${DOMAIN}/feed.atom`,
@@ -79,7 +79,7 @@ async function buildNotesRSS() {
     description: 'kkopite\'s Notes',
     id: 'https://kkopite.netlify.app/notes',
     link: 'https://kkopite.netlify.app/notes',
-    copyright: 'CC BY-NC-SA 4.0 2021 © kkopite',
+    copyright: 'CC BY-NC-SA 4.0 2022 © kkopite',
     feedLinks: {
       json: 'https://kkopite.netlify.app/notes/feed.json',
       atom: 'https://kkopite.netlify.app/notes/feed.atom',
