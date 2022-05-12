@@ -28,13 +28,6 @@ defineProps<{ projects: Record<string, any[]> }>()
       </a>
     </div>
   </template>
-  <div class="markdown pb5">
-    <p op75>
-      <em>
-        谢谢你对我的项目感兴趣
-      </em>
-    </p>
-  </div>
 </template>
 
 <style scoped>
