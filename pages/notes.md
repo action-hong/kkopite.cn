@@ -13,7 +13,7 @@ description: 一些简短代码片段、笔记
 
 _2022/05/12_
 
-首先当然是你是使用[`Volar`](https://github.com/johnsoncodehk/volar)这个插件
+首先你使用的是[`Volar`](https://github.com/johnsoncodehk/volar)这个插件
 
 在写`vue`组件时，经常碰到引入的自定义组件标红高亮且无法进行跳转。一般用以下两种方法就能解决:
 
