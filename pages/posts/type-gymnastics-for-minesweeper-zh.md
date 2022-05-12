@@ -5,6 +5,8 @@ lang: zh
 duration: 10min
 ---
 
+[[toc]]
+
 > [知乎链接](https://zhuanlan.zhihu.com/p/429165133)
 
 前些天逛知乎看到了篇文章，[用 TypeScript 类型运算实现一个中国象棋程序](https://zhuanlan.zhihu.com/p/426966480)，边看边喊牛逼，原来还可以这么玩？想我之前学了`TypeScript`后，也就是做一些[`TypeScript` 类型体操姿势合集](https://github.com/type-challenges/type-challenges)，后面项目里也很少用到忘得也差不多了，借此机会重新温习一下相关内容。

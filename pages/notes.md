@@ -5,6 +5,8 @@ subtitle: 一些简短代码片段、笔记
 description: 一些简短代码片段、笔记
 ---
 
+[[toc]]
+
 [RSS Feed](https://kkopite.netlify.app/notes/feed.xml)
 
 <article>
