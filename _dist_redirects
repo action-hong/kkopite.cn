@@ -1,5 +1,5 @@
-/rss https://kkopite.cn/feed.xml 301
-/blog https://kkopite.cn/posts 301
+/rss https://kkopite.netlify.app/feed.xml 301
+/blog https://kkopite.netlify.app/posts 301
 
 /github https://github.com/action-hong 301
 /gh https://github.com/action-hong 301

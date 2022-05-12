@@ -7,7 +7,7 @@ import type { FeedOptions, Item } from 'feed'
 import { Feed } from 'feed'
 import { slugify } from './slugify'
 
-const DOMAIN = 'https://kkopite.cn'
+const DOMAIN = 'https://kkopite.netlify.app'
 const AUTHOR = {
   name: 'kkopitehong',
   email: 'kkopitehong@foxmail.com',
@@ -77,13 +77,13 @@ async function buildNotesRSS() {
   const options = {
     title: 'kkopite\'s Notes',
     description: 'kkopite\'s Notes',
-    id: 'https://kkopite.cn/notes',
-    link: 'https://kkopite.cn/notes',
+    id: 'https://kkopite.netlify.app/notes',
+    link: 'https://kkopite.netlify.app/notes',
     copyright: 'CC BY-NC-SA 4.0 2021 © kkopite',
     feedLinks: {
-      json: 'https://kkopite.cn/notes/feed.json',
-      atom: 'https://kkopite.cn/notes/feed.atom',
-      rss: 'https://kkopite.cn/notes/feed.xml',
+      json: 'https://kkopite.netlify.app/notes/feed.json',
+      atom: 'https://kkopite.netlify.app/notes/feed.atom',
+      rss: 'https://kkopite.netlify.app/notes/feed.xml',
     },
   }
   const noteMatches = raw.matchAll(/<article>(.*?)<\/article>/gms)

@@ -2,7 +2,7 @@
 useHead({
   meta: [
     { property: 'og:title', content: 'kkopite' },
-    { property: 'og:image', content: 'https://kkopite.cn/avatar.png' },
+    { property: 'og:image', content: 'https://kkopite.netlify.app/avatar.png' },
     { name: 'description', content: 'kkopite\'s Portfolio' },
     { name: 'twitter:card', content: 'summary' },
     { name: 'twitter:creator', content: '@kkopitehong' },

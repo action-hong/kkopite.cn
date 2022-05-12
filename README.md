@@ -1,8 +1,8 @@
-**[kkopite.cn](https://kkopite.cn)**
+**[kkopite.netlify.app](https://kkopite.netlify.app)**
 
 my personal website powered by [Vite](https://vitejs.dev/)
 
-base [kkopite.cn](https://github.com/antfu/antfu.me)
+base [kkopite.netlify.app](https://github.com/antfu/antfu.me)
 
 <br>
 
