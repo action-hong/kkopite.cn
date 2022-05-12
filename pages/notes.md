@@ -7,6 +7,8 @@ description: 一些简短代码片段、笔记
 
 [RSS Feed](https://kkopite.netlify.app/notes/feed.xml)
 
+<article>
+
 ## 使用`VS Code`编写`vue`时，自定义组件变红，且无法跳转
 
 __2022/05/12__
@@ -42,3 +44,5 @@ pnpm i
 完成如上步骤后，重新加载`VS Code`，大概率红色高亮就没了，组件也能正常跳转。
 
 PS: 如果还不行只好去官方的[issue](https://github.com/johnsoncodehk/volar/issues/)求救了
+
+</article>
