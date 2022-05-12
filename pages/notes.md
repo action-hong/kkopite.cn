@@ -11,7 +11,7 @@ description: 一些简短代码片段、笔记
 
 ## 使用`VS Code`编写`vue`时，自定义组件变红，且无法跳转
 
-__2022/05/12__
+_2022/05/12_
 
 首先当然是你是使用[`Volar`](https://github.com/johnsoncodehk/volar)这个插件
 

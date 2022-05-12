@@ -1,4 +1,5 @@
 import { dirname } from 'path'
+import os from 'os'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import matter from 'gray-matter'
@@ -46,8 +47,8 @@ async function buildBlogRSS() {
           const raw = await fs.readFile(i, 'utf-8')
           const { data, content } = matter(raw)
 
-          if (data.lang !== 'en')
-            return
+          // if (data.lang !== 'en')
+          //   return
 
           const html = markdown.render(content)
             .replace('src="/', `src="${DOMAIN}/`)
@@ -71,6 +72,8 @@ async function buildBlogRSS() {
   await writeFeed('feed', options, posts)
 }
 
+const NOTE_HEAD = new RegExp(`##\\s*(.*)${os.EOL}`)
+
 async function buildNotesRSS() {
   const raw = await fs.readFile('pages/notes.md', 'utf-8')
 
@@ -88,17 +91,15 @@ async function buildNotesRSS() {
   }
   const noteMatches = raw.matchAll(/<article>(.*?)<\/article>/gms)
   const notes = []
-
   for (const noteMatch of noteMatches) {
     const rawNote = noteMatch[1]
     const dateMatch = rawNote.match(/\n_(.+)_/)!
-    const titleMatch = rawNote.match(/##\s*(.*)\n/)!
+    const titleMatch = rawNote.match(NOTE_HEAD)!
     const title = titleMatch[1]
     const date = new Date(dateMatch[1])
     const anchor = slugify(title)
     const rawContent = rawNote.slice(dateMatch.index).replace(/.*\n/, '').trim()
     const content = markdown.render(rawContent).replace('src="/', `src="${DOMAIN}/`)
-
     notes.push({
       title,
       date,
