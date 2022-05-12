@@ -1,29 +1,30 @@
 import fs from 'fs-extra'
-import { Octokit } from '@octokit/rest'
+// import { Octokit } from '@octokit/rest'
 
-const pages = 2
+// const pages = 2
 
 async function run() {
   const manual = await fs.readFile('_redirects', 'utf-8')
-  const gh = new Octokit({ token: process.env.GITHUB_TOKEN! })
+  // const gh = new Octokit({ token: process.env.GITHUB_TOKEN! })
 
   const redirects: [string, string, number][] = []
 
-  for (let i = 1; i <= pages; i++) {
-    const { data: repos } = await gh.repos.listForUser({
-      type: 'owner',
-      username: 'antfu',
-      per_page: 100,
-      page: i,
-    })
+  // 所有自己的项目都加进来, 这里暂时不需要
+  // for (let i = 1; i <= pages; i++) {
+  //   const { data: repos } = await gh.repos.listForUser({
+  //     type: 'owner',
+  //     username: 'action-hong',
+  //     per_page: 100,
+  //     page: i,
+  //   })
 
-    for (const repo of repos) {
-      if (['test', 'static', 'repro', 'issue', 'resume', 'antfu'].some(i => repo.name.includes(i)))
-        continue
-      if (!repo.private && !repo.fork && !repo.archived)
-        redirects.push([`/${repo.name}`, repo.url.replace('api.github.com/repos', 'github.com'), 302])
-    }
-  }
+  //   for (const repo of repos) {
+  //     if (['test', 'static', 'repro', 'issue', 'resume', 'action-hong'].some(i => repo.name.includes(i)))
+  //       continue
+  //     if (!repo.private && !repo.fork && !repo.archived)
+  //       redirects.push([`/${repo.name}`, repo.url.replace('api.github.com/repos', 'github.com'), 302])
+  //   }
+  // }
 
   const final = `${manual}\n${redirects.map(i => i.join('\t')).join('\n')}`
 

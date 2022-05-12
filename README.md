@@ -1,6 +1,8 @@
-**[antfu.me](https://antfu.me)**
+**[kkopite.cn](https://kkopite.cn)**
 
 my personal website powered by [Vite](https://vitejs.dev/)
+
+base [kkopite.cn](https://github.com/antfu/antfu.me)
 
 <br>
 

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 export const isDark = useDark()
-export const englishOnly = useStorage('antfu-english-only', false)
+export const englishOnly = useStorage('kkopite-english-only', false)
 
 export function formatDate(d: string | Date) {
   const date = dayjs(d)
