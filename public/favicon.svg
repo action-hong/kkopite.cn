@@ -1,13 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97.98 97.98">
-  <style>
-    .a {
-      fill: #333;
-    }
-    @media (prefers-color-scheme: dark) {
-      .a {
-        fill: #eee;
-      }
-    }
-  </style>
-  <path class="a" fill-rule="evenodd" clip-rule="evenodd" d="M0 0H40V20H60V0H100V20H80V40H20V20H0V0ZM0 60V80H40V100H60V80H100V60H0Z"/>
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H40V20H60V0H100V20H80V40H20V20H0V0ZM0 60V80H40V100H60V80H100V60H0Z" fill="url(#paint0_linear_11_261)"/>
+<defs>
+<linearGradient id="paint0_linear_11_261" x1="0" y1="0" x2="98.5" y2="100" gradientUnits="userSpaceOnUse">
+<stop stop-color="#38F59B"/>
+<stop offset="1" stop-color="#2BB0EA" stop-opacity="0.32"/>
+</linearGradient>
+</defs>
 </svg>

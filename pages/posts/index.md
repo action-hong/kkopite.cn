@@ -3,7 +3,7 @@ title: Blog - kkopite
 display: ''
 ---
 
-<SubNav/>
+<!-- <SubNav/> -->
 
 <ClientOnly>
   <Plum/>
