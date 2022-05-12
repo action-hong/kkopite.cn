@@ -2,7 +2,7 @@
 
 my personal website powered by [Vite](https://vitejs.dev/)
 
-base [kkopite.netlify.app](https://github.com/antfu/antfu.me)
+base [antfu.me](https://github.com/antfu/antfu.me)
 
 <br>
 
