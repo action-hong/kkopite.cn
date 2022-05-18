@@ -33,3 +33,9 @@ type IconSize = 'sm' | 'xs' | string
 // https://twitter.com/mpocock1/status/1506607945445949446
 type IconSize = 'sm' | 'xs' | Omit<string, 'sm' | 'xs'>
 ```
+
+或者这样：
+
+```ts
+type IconSize1 = 'sm' | 'xs' | (string & {})
+```

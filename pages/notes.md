@@ -11,6 +11,27 @@ description: 一些简短代码片段、笔记
 
 <article>
 
+_2022/05/18_
+
+在写`markdown`时有时也需要写一些代码，这时候可能会使用`eslint-plugin-markdown`来校验这些代码块。但有时候可能代码只是一些示意代码，因此不会那么合法，这时候需要跳过这些代码不进行检验，可以使用`<!-- eslint-skip -->`这个注释加载不检测的代码块前面：
+
+````markdown
+<!-- eslint-skip -->
+
+```js
+// 该代码不会被校验
+const obj = {
+  name: 'kkopite',
+  ...
+}
+```
+
+````
+
+</article>
+
+<article>
+
 ## 使用`VS Code`编写`vue`时，自定义组件变红，且无法跳转
 
 _2022/05/12_
