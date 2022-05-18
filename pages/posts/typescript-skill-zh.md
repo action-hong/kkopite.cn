@@ -30,9 +30,6 @@ type IconSize = 'sm' | 'xs' | string
 因此想做到我们的需求可以改成如下这样子：
 
 ```ts
+// https://twitter.com/mpocock1/status/1506607945445949446
 type IconSize = 'sm' | 'xs' | Omit<string, 'sm' | 'xs'>
 ```
-
-> 但如果是number就不起作用了
-
-[参考](https://www.bilibili.com/video/BV1St4y1x71A?spm_id_from=333.999.0.0)
