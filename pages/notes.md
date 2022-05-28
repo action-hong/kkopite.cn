@@ -51,7 +51,7 @@ _2022/05/28_
 
 > 一开始其实想到一个比较笨的方法，就是通过[`clip-path`](https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path) 来去裁剪出白线显示的部分，但是如果其`.circle`元素位置变化亦或是白线不是横的的话计算就相对麻烦些，遂放弃。
 
-- [效果预览](https://codepen.io/pen/)
+- [效果预览](https://codepen.io/action-hong/pen/BaYYLWW)
 
 </article>
 
