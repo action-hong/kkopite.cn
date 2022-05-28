@@ -9,7 +9,55 @@ description: 一些简短代码片段、笔记
 
 [RSS Feed](https://kkopite.netlify.app/notes/feed.xml)
 
+
 <article>
+
+## 透明元素“遮住”父元素背景
+
+_2022/05/28_
+
+我们需要实现类似下图的效果：
+
+![transparent-element-hide-bg](/images/transparent-element-hide-bg.png)
+
+它的结构是这样的：
+
+```html
+<body>
+  <div class="container">
+    <div class="circle">1</div>
+    <div class="circle">2</div>
+    <div class="circle">3</div>
+  </div>
+</body>
+```
+
+`.container`元素背景是一条白线，而`body`背景是个红到绿的渐变色，因此想让`.circle`元素设置背景色来遮住白线就比较困难。
+
+这里可以使用[`backdrop-filter`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/backdrop-filter)来实现：
+
+```diff
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  color: #fff;
+  line-height: 40px;
+  text-align: center;
++ backdrop-filter: blur(10px);
+}
+```
+
+> 一开始其实想到一个比较笨的方法，就是通过[`clip-path`](https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path) 来去裁剪出白线显示的部分，但是如果其`.circle`元素位置变化亦或是白线不是横的的话计算就相对麻烦些，遂放弃。
+
+- [效果预览](https://codepen.io/pen/)
+
+</article>
+
+<article>
+
+## `markdown`代码块跳过`eslint`检验
 
 _2022/05/18_
 
