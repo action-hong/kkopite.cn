@@ -1,14 +1,12 @@
 <script lang="ts" setup>
 
-const visible = ref(false)
-
 function handleClick() {
   window.scrollTo({
     top: 0,
   })
 }
 
-const { y } = useScroll(document)
+const { y } = useScroll(typeof document === 'undefined' ? null : document)
 
 </script>
 
