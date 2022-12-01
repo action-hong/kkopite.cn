@@ -2,7 +2,7 @@
 title: 一些有趣的算法的集合
 date: 2022-11-25T15:00:00.000+00:00
 lang: zh
-duration: min
+duration: 2 min
 ---
 
 [[toc]]
