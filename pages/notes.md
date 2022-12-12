@@ -9,6 +9,42 @@ description: 一些简短代码片段、笔记
 
 [RSS Feed](https://kkopite.netlify.app/notes/feed.xml)
 
+<article>
+
+## git输出中文显示错误
+
+_2022/12/12_
+
+我们给仓库里面添加一个中文文件，然后查看时，发现中文文字没有很好的显示：
+
+```bash
+git status
+```
+
+```log
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   "1827.\346\234\200\345\260\221\346\223\215\344\275\234\344\275\277\346\225\260\347\273\204\351\200\222\345\242\236.js"
+```
+
+这时候可尝试做如下配置：
+
+```bash
+git config --global core.quotepath false
+```
+
+然后再次键入`git status`就正常了：
+
+```
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   1827.最少操作使数组递增.js
+```
+
+</article>
+
 
 <article>
 
