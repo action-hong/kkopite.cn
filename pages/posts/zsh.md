@@ -18,3 +18,24 @@ vscode下终端显示会出现乱码，需要在安装完字体后，配置好�
 ```
 
 可能会出现vscode的终端各种诡异问题：如方向键无法使用、显示光标乱跳、多了很多空格、回退按键各种问题出现，而直接打开`git-bash`一切正常，这时候可以**直接卸载git，重新安装**，基本就能解决了 
+
+使用git的一些乱码（windows下）
+
+使用git的vi编辑器时，中文显示乱码。尝试修改git目录底下的`/path to git/etc/vimrc`
+
+```
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
+```
+
+使用`git status`显示出来的文件的中文名没有显示正确，尝试如下配置：
+
+```bash
+git config --global core.quotepath false
+```
+
+## 参考
+
+- [git 显示中文和解决中文乱码?- 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/133706032)
+- [Linux系统下vim编辑文件时出现中文乱码的解决办法 - 腾讯云开发者社区腾讯(tencent.com)](https://cloud.tencent.com/developer/article/1920588)
