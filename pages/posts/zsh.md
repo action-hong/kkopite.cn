@@ -35,7 +35,29 @@ set encoding=utf-8
 git config --global core.quotepath false
 ```
 
+使用`git log`时中文也可能出现如下显示错误：
+
+```log
+<A1><B1><C1>
+```
+
+尝试如下设置：
+
+```bash
+git config --global i18n.commitencoding utf-8  # commit 编码
+git config --global i18n.logoutputencoding utf-8 # log输出显示编码
+```
+
+然后设置环境变量
+
+```
+export LESSCHARSET=utf-8
+```
+
+> ps: window下可以在环境变量中添加一个`LESSCHARSET`, 对应值为`utf-8`
+
 ## 参考
 
 - [git 显示中文和解决中文乱码?- 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/133706032)
 - [Linux系统下vim编辑文件时出现中文乱码的解决办法 - 腾讯云开发者社区腾讯(tencent.com)](https://cloud.tencent.com/developer/article/1920588)
+- [问题：git处理中文名称时候显示为编码形式（已解决| UTF (lmlphp.com)](https://www.lmlphp.com/user/62605/article/item/2392791/)
