@@ -9,6 +9,31 @@ description: 一些简短代码片段、笔记
 
 [RSS Feed](https://kkopite.netlify.app/notes/feed.xml)
 
+
+<article>
+
+_2023/02/06_
+
+我们使用clash时，一般都会用自动订阅，这就导致了我们自己加的一些规则在更新时被覆盖掉
+
+我们可以使用[parsers](https://docs.cfw.lbyczf.com/contents/parser.html#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%A2%84%E5%A4%84%E7%90%86)，例如我们添加一个`openai.com`的规则，让访问`chatgpt`时使用代理：
+
+1. 选择settings界面
+2. 滚动到Profiles栏
+3. 点击Parsers右侧的Edit编辑，输入：
+```yaml
+parsers:
+  - url: 你的订阅地址
+    yaml:
+      prepend-rules:
+        - DOMAIN-SUFFIX,openai.com,Proxies
+```
+
+下次自动更新时，这条规则就会自动加上，就不用再每次更新后手动添加规则了。
+
+</article>
+
+
 <article>
 
 ## git输出中文显示错误
