@@ -12,6 +12,69 @@ description: 一些简短代码片段、笔记
 
 <article>
 
+## clash规则预处理
+
+_2023/02/06_
+
+我们使用clash时，一般都会用自动订阅，这就导致了我们自己加的一些规则在更新时被覆盖掉
+
+我们可以使用[parsers](https://docs.cfw.lbyczf.com/contents/parser.html#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%A2%84%E5%A4%84%E7%90%86)，例如我们添加一个`openai.com`的规则，让访问`chatgpt`时使用代理：
+
+1. 选择settings界面
+2. 滚动到Profiles栏
+3. 点击Parsers右侧的Edit编辑，输入：
+```yaml
+parsers:
+  - url: 你的订阅地址
+    yaml:
+      prepend-rules:
+        - DOMAIN-SUFFIX,openai.com,Proxies
+```
+
+下次自动更新时，这条规则就会自动加上，就不用再每次更新后手动添加规则了。
+
+</article>
+
+
+<article>
+
+## git输出中文显示错误
+
+_2022/12/12_
+
+我们给仓库里面添加一个中文文件，然后查看时，发现中文文字没有很好的显示：
+
+```bash
+git status
+```
+
+```log
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   "1827.\346\234\200\345\260\221\346\223\215\344\275\234\344\275\277\346\225\260\347\273\204\351\200\222\345\242\236.js"
+```
+
+这时候可尝试做如下配置：
+
+```bash
+git config --global core.quotepath false
+```
+
+然后再次键入`git status`就正常了：
+
+```
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   1827.最少操作使数组递增.js
+```
+
+</article>
+
+
+<article>
+
 ## 透明元素“遮住”父元素背景
 
 _2022/05/28_
