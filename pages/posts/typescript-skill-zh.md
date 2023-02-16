@@ -7,9 +7,9 @@ duration: 10min
 
 [[toc]]
 
-## `tsup`打包时排除依赖
+## [`tsup`](https://tsup.egoist.dev/)打包时排除依赖
 
-[`tsup`]打包时会默认排除掉`package.json`的`dependencies`和`peerDependencies`，因此如果需要将某些依赖打包到生成文件的话，使用[`noExternal`](https://tsup.egoist.dev/#excluding-all-packages)配置
+[`tsup`](https://tsup.egoist.dev/)打包时会默认排除掉`package.json`的`dependencies`和`peerDependencies`，因此如果需要将某些依赖打包到生成文件的话，使用[`noExternal`](https://tsup.egoist.dev/#excluding-all-packages)配置
 
 ## 字面量字符串与String联合类型时丢失
 
