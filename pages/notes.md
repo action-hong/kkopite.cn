@@ -13,6 +13,8 @@ description: 一些简短代码片段、笔记
 
 _2023/04/17_
 
+## 读取配置
+
 一些框架，类库工具都会提供如下的方式来编写配置文件，这样还能借助ts的功能来校验配置
 
 ```ts
@@ -30,19 +32,20 @@ export default defineConfig({
 // cli.mjs
 import jiti from 'jiti'
 
-const _require = jiti(rootDir, {
+// 配置文件为 my.config.ts
+// 读取配置
+const config = jiti(rootDir, {
   interopDefault: true,
   esmResolve: true,
-})
-
-// 读取配置
-const config = _require('./my.config')
+})('./my.config')
 ```
 
 或者你可以直接使用这个库 [`unconfig`](https://www.npmjs.com/package/unconfig)
 
 
 </article>
+
+<article>
 _2023/03/15_
 
 ## `cordova`使用本地链接调试
