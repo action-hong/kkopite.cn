@@ -9,6 +9,40 @@ description: 一些简短代码片段、笔记
 
 [RSS Feed](https://kkopite.netlify.app/notes/feed.xml)
 
+<article>
+
+_2023/04/17_
+
+一些框架，类库工具都会提供如下的方式来编写配置文件，这样还能借助ts的功能来校验配置
+
+```ts
+// my.config.ts
+import { defineConfig } from 'third-package'
+
+export default defineConfig({
+
+})
+```
+
+我们可以使用`jiti`这个工具来读取这个`ts`配置：
+
+```js
+// cli.mjs
+import jiti from 'jiti'
+
+const _require = jiti(rootDir, {
+  interopDefault: true,
+  esmResolve: true,
+})
+
+// 读取配置
+const config = _require('./my.config')
+```
+
+或者你可以直接使用这个库 [`unconfig`](https://www.npmjs.com/package/unconfig)
+
+
+</article>
 
 <article>
 
