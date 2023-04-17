@@ -43,6 +43,22 @@ const config = _require('./my.config')
 
 
 </article>
+_2023/03/15_
+
+## `cordova`使用本地链接调试
+
+笔者之前开发`cordova`时，前端是用`vue-cli`工具链开发，可以指定`config.xml`内的`content`标签值，这样就可以边开发，边直接在手机上看到效果了
+
+这边假设开启的服务跑在如下链接，则可以这样设置
+
+```
+// config.xml
+<content src="http://192.168.1.245:8080" />
+```
+
+
+</article>
+
 
 <article>
 
