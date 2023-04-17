@@ -15,3 +15,8 @@ duration: 10min
 
 - [`unconfig`](https://www.npmjs.com/package/unconfig) - 配置读取解决方案
 - [`defu`](https://www.npmjs.com/package/defu) - 轻量级的对象合并库
+
+## TypeScript
+
+- [`arktype`](https://www.npmjs.com/package/arktype) - 运行时的数据校验
+- [`ts-morph`](https://www.npmjs.com/package/ts-morph) - 封装了`TypeScript`编译器相关的API，提供了更简单的接口来读取、修改ts代码
