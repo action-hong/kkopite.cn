@@ -11,6 +11,34 @@ description: 一些简短代码片段、笔记
 
 <article>
 
+_2023/06/26_
+
+## keypress和keydown事件中的`keyCode`不同
+
+```js
+document.addEventListener('keydown', (e) => {
+  console.log(e.keyCode)
+})
+document.addEventListener('keypress', (e) => {
+  console.log(e.keyCode)
+})
+```
+
+尝试点击键盘上的字母，`keydown`拿到对应英文字母的大写的 ascii码，而`keypress`根据键入的是大写字母还是小写字母拿到对应的 ascii码
+
+你可以分别尝试键入小写的`h`，和大写的`H`
+
+<KeyPress />
+
+参考阅读：
+
+- [javascript - keypress and keyup - why is the keyCode different? - Stack Overflow](https://stackoverflow.com/questions/11030532/keypress-and-keyup-why-is-the-keycode-different)
+- 
+
+</article>
+
+<article>
+
 _2023/04/17_
 
 ## 读取配置
@@ -46,6 +74,7 @@ const config = jiti(rootDir, {
 </article>
 
 <article>
+
 _2023/03/15_
 
 ## `cordova`使用本地链接调试
