@@ -72,6 +72,13 @@ onMounted(() => {
     <p v-if="frontmatter.subtitle" class="opacity-50 !-mt-6 italic">
       {{ frontmatter.subtitle }}
     </p>
+    <p v-if="frontmatter.tag" class="!-mt-6">
+      <span
+        v-for="text in frontmatter.tag"
+        :key="text"
+        class="text-xs border border-current rounded px-1 pb-0.2 mr-1"
+      >{{ '#' + text }}</span>
+    </p>
   </div>
   <article ref="content">
     <slot />

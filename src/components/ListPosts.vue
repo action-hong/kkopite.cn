@@ -17,7 +17,7 @@ const props = defineProps<{
 
 const router = useRouter()
 const routes: Post[] = router.getRoutes()
-  .filter(i => i.path.startsWith('/posts') && i.meta.frontmatter.date)
+  .filter(i => i.path.startsWith('/posts') && i.meta.frontmatter.date && !i.meta.frontmatter.private)
   .sort((a, b) => +new Date(b.meta.frontmatter.date) - +new Date(a.meta.frontmatter.date))
   .filter(i => !i.path.endsWith('.html') && i.meta.frontmatter.type === props.type)
   .map(i => ({
@@ -47,9 +47,9 @@ const posts = computed(() => (props.posts || routes).filter(i => !englishOnly.va
         <div class="title text-lg">
           {{ route.title }}
           <sup
-            v-if="route.lang === 'zh'"
+            v-if="route.lang === 'en'"
             class="text-xs border border-current rounded px-1 pb-0.2"
-          >中文</sup>
+          >English</sup>
         </div>
         <div class="time opacity-50 text-sm -mt-1">
           {{ formatDate(route.date) }}
