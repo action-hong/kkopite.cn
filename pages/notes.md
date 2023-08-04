@@ -11,6 +11,34 @@ description: 一些简短代码片段、笔记
 
 <article>
 
+_2023/08/04_
+
+## GitHubError: Resource not accessible by integration (403)
+
+fork别人的项目提交后，执行workflow, 其中传如下错误：
+
+```bash
+Run yarn run gh:release
+yarn run v1.22.19
+$ conventional-github-releaser -p angular
+GitHubError: Resource not accessible by integration (403)
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+Error: Process completed with exit code 1.
+```
+
+翻阅[资料](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token)，需要修改GITHUB_TOKEN的权限：
+
+1. 打开对应仓库的settings
+2. 点击Actions-General
+3. 找到Workflow permissions项，选择**Read and  write permissions**
+4. 点击`Save`即可
+
+
+</article>
+
+<article>
+
 _2023/06/26_
 
 ## keypress和keydown事件中的`keyCode`不同
