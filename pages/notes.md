@@ -11,6 +11,16 @@ description: 一些简短代码片段、笔记
 
 <article>
 
+_2023/10/27_
+
+## 使用`jest`关闭`prettier`
+
+使用`jest`的 inline snapshots功能时，默认会用`prettier`来处理整个文件，可以通过配置`prettierPath: null`来关掉它
+
+</article>
+
+<article>
+
 _2023/08/04_
 
 ## GitHubError: Resource not accessible by integration (403)
