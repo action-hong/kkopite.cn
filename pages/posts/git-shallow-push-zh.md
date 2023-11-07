@@ -7,7 +7,7 @@ tag:
   - git
 ---
 
-最近要将一些以前的旧项目全放到gitlab上，有些项目推送时发现如下问题：
+最近要将一些以前的旧项目全放到 gitlab 上，有些项目推送时发现如下问题：
 
 ```bash
 git push -u origin --all

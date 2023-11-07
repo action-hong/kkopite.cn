@@ -13,9 +13,9 @@ description: 一些简短代码片段、笔记
 
 _2023/10/27_
 
-## 使用`jest`关闭`prettier`
+## 使用 `jest` 关闭 `prettier`
 
-使用`jest`的 inline snapshots功能时，默认会用`prettier`来处理整个文件，可以通过配置`prettierPath: null`来关掉它
+使用 `jest` 的 inline snapshots 功能时，默认会用 `prettier` 来处理整个文件，可以通过配置 `prettierPath: null` 来关掉它
 
 </article>
 
@@ -23,9 +23,9 @@ _2023/10/27_
 
 _2023/08/04_
 
-## GitHubError: Resource not accessible by integration (403)
+## GitHubError：Resource not accessible by integration (403)
 
-fork别人的项目提交后，执行workflow, 其中传如下错误：
+fork 别人的项目提交后，执行 workflow，其中传如下错误：
 
 ```bash
 Run yarn run gh:release
@@ -37,12 +37,12 @@ info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this comm
 Error: Process completed with exit code 1.
 ```
 
-翻阅[资料](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token)，需要修改GITHUB_TOKEN的权限：
+翻阅[资料](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token)，需要修改 GITHUB_TOKEN 的权限：
 
-1. 打开对应仓库的settings
-2. 点击Actions-General
-3. 找到Workflow permissions项，选择**Read and  write permissions**
-4. 点击`Save`即可
+1. 打开对应仓库的 settings
+2. 点击 Actions-General
+3. 找到 Workflow permissions 项，选择 **Read and write permissions**
+4. 点击 `Save` 即可
 
 
 </article>
@@ -51,7 +51,7 @@ Error: Process completed with exit code 1.
 
 _2023/06/26_
 
-## keypress和keydown事件中的`keyCode`不同
+## keypress 和 keydown 事件中的 `keyCode` 不同
 
 ```js
 document.addEventListener('keydown', (e) => {
@@ -62,15 +62,15 @@ document.addEventListener('keypress', (e) => {
 })
 ```
 
-尝试点击键盘上的字母，`keydown`拿到对应英文字母的大写的 ascii码，而`keypress`根据键入的是大写字母还是小写字母拿到对应的 ascii码
+尝试点击键盘上的字母，`keydown` 拿到对应英文字母的大写的 ascii 码，而 `keypress` 根据键入的是大写字母还是小写字母拿到对应的 ascii 码
 
-你可以分别尝试键入小写的`h`，和大写的`H`
+你可以分别尝试键入小写的 `h`，和大写的 `H`
 
 <KeyPress />
 
 参考阅读：
 
-- [javascript - keypress and keyup - why is the keyCode different? - Stack Overflow](https://stackoverflow.com/questions/11030532/keypress-and-keyup-why-is-the-keycode-different)
+- [javascript - keypress and keyup - why is the keyCode different？ - Stack Overflow](https://stackoverflow.com/questions/11030532/keypress-and-keyup-why-is-the-keycode-different)
 - 
 
 </article>
@@ -81,7 +81,7 @@ _2023/04/17_
 
 ## 读取配置
 
-一些框架，类库工具都会提供如下的方式来编写配置文件，这样还能借助ts的功能来校验配置
+一些框架，类库工具都会提供如下的方式来编写配置文件，这样还能借助 ts 的功能来校验配置
 
 ```ts
 // my.config.ts
@@ -92,7 +92,7 @@ export default defineConfig({
 })
 ```
 
-我们可以使用`jiti`这个工具来读取这个`ts`配置：
+我们可以使用 `jiti` 这个工具来读取这个 `ts` 配置：
 
 ```js
 // cli.mjs
@@ -115,9 +115,9 @@ const config = jiti(rootDir, {
 
 _2023/03/15_
 
-## `cordova`使用本地链接调试
+## `cordova` 使用本地链接调试
 
-笔者之前开发`cordova`时，前端是用`vue-cli`工具链开发，可以指定`config.xml`内的`content`标签值，这样就可以边开发，边直接在手机上看到效果了
+笔者之前开发 `cordova` 时，前端是用 `vue-cli` 工具链开发，可以指定 `config.xml` 内的 `content` 标签值，这样就可以边开发，边直接在手机上看到效果了
 
 这边假设开启的服务跑在如下链接，则可以这样设置
 
@@ -132,17 +132,17 @@ _2023/03/15_
 
 <article>
 
-## clash规则预处理
+## clash 规则预处理
 
 _2023/02/06_
 
-我们使用clash时，一般都会用自动订阅，这就导致了我们自己加的一些规则在更新时被覆盖掉
+我们使用 clash 时，一般都会用自动订阅，这就导致了我们自己加的一些规则在更新时被覆盖掉
 
-我们可以使用[parsers](https://docs.cfw.lbyczf.com/contents/parser.html#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%A2%84%E5%A4%84%E7%90%86)，例如我们添加一个`openai.com`的规则，让访问`chatgpt`时使用代理：
+我们可以使用 [parsers](https://docs.cfw.lbyczf.com/contents/parser.html#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%A2%84%E5%A4%84%E7%90%86)，例如我们添加一个 `openai.com` 的规则，让访问 `chatgpt` 时使用代理：
 
-1. 选择settings界面
-2. 滚动到Profiles栏
-3. 点击Parsers右侧的Edit编辑，输入：
+1. 选择 settings 界面
+2. 滚动到 Profiles 栏
+3. 点击 Parsers 右侧的 Edit 编辑，输入：
 ```yaml
 parsers:
   - url: 你的订阅地址
@@ -158,7 +158,7 @@ parsers:
 
 <article>
 
-## git输出中文显示错误
+## git 输出中文显示错误
 
 _2022/12/12_
 
@@ -181,7 +181,7 @@ Changes not staged for commit:
 git config --global core.quotepath false
 ```
 
-然后再次键入`git status`就正常了：
+然后再次键入 `git status` 就正常了：
 
 ```
 Changes not staged for commit:
@@ -195,7 +195,7 @@ Changes not staged for commit:
 
 <article>
 
-## 透明元素“遮住”父元素背景
+## 透明元素 “遮住” 父元素背景
 
 _2022/05/28_
 
@@ -215,9 +215,9 @@ _2022/05/28_
 </body>
 ```
 
-`.container`元素背景是一条白线，而`body`背景是个红到绿的渐变色，因此想让`.circle`元素设置背景色来遮住白线就比较困难。
+`.container` 元素背景是一条白线，而 `body` 背景是个红到绿的渐变色，因此想让 `.circle` 元素设置背景色来遮住白线就比较困难。
 
-这里可以使用[`backdrop-filter`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/backdrop-filter)来实现：
+这里可以使用 [`backdrop-filter`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/backdrop-filter) 来实现：
 
 ```diff
 .circle {
@@ -232,7 +232,7 @@ _2022/05/28_
 }
 ```
 
-> 一开始其实想到一个比较笨的方法，就是通过[`clip-path`](https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path) 来去裁剪出白线显示的部分，但是如果其`.circle`元素位置变化亦或是白线不是横的的话计算就相对麻烦些，遂放弃。
+> 一开始其实想到一个比较笨的方法，就是通过 [`clip-path`](https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path) 来去裁剪出白线显示的部分，但是如果其 `.circle` 元素位置变化亦或是白线不是横的的话计算就相对麻烦些，遂放弃。
 
 - [效果预览](https://codepen.io/action-hong/pen/BaYYLWW)
 
@@ -240,12 +240,12 @@ _2022/05/28_
 
 <article>
 
-## `markdown`代码块跳过`eslint`检验
+## `markdown` 代码块跳过 `eslint` 检验
 
 _2022/05/18_
 
 
-在写`markdown`时有时也需要写一些代码，这时候可能会使用`eslint-plugin-markdown`来校验这些代码块。但有时候可能代码只是一些示意代码，因此不会那么合法，这时候需要跳过这些代码不进行检验，可以使用`<!-- eslint-skip -->`这个注释加载不检测的代码块前面：
+在写 `markdown` 时有时也需要写一些代码，这时候可能会使用 `eslint-plugin-markdown` 来校验这些代码块。但有时候可能代码只是一些示意代码，因此不会那么合法，这时候需要跳过这些代码不进行检验，可以使用 `<!-- eslint-skip -->` 这个注释加载不检测的代码块前面：
 
 ````markdown
 <!-- eslint-skip -->
@@ -264,15 +264,15 @@ const obj = {
 
 <article>
 
-## 使用`VS Code`编写`vue`时，自定义组件变红，且无法跳转
+## 使用 `VS Code` 编写 `vue` 时，自定义组件变红，且无法跳转
 
 _2022/05/12_
 
-首先你使用的是[`Volar`](https://github.com/johnsoncodehk/volar)这个插件
+首先你使用的是 [`Volar`](https://github.com/johnsoncodehk/volar) 这个插件
 
-在写`vue`组件时，经常碰到引入的自定义组件标红高亮且无法进行跳转。一般用以下两种方法就能解决:
+在写 `vue` 组件时，经常碰到引入的自定义组件标红高亮且无法进行跳转。一般用以下两种方法就能解决：
 
-1. 更改`tsconfig.json`，给`compilerOptions`配置`"jsx": "preserve"`:
+1. 更改 `tsconfig.json`，给 `compilerOptions` 配置 `"jsx": "preserve"`：
 
 ```json
 {
@@ -282,22 +282,22 @@ _2022/05/12_
 }
 ```
 
-2. 如果你使用`pnpm`，尝试用[shamefully-hoist](https://pnpm.io/npmrc#shamefully-hoist)模式重新安装依赖(**如果你是使用`npm`或`yarn`则忽略该方法**)
+2. 如果你使用 `pnpm`，尝试用 [shamefully-hoist](https://pnpm.io/npmrc#shamefully-hoist) 模式重新安装依赖 (**如果你是使用 `npm` 或 `yarn` 则忽略该方法**)
 
-可以在你的`.npmrc`文件里添加如下配置:
+可以在你的 `.npmrc` 文件里添加如下配置：
 
 ```
 shamefully-hoist=true
 ```
 
-然后重新安装:
+然后重新安装：
 
 ```bash
 pnpm i
 ```
 
-完成如上步骤后，重新加载`VS Code`，大概率红色高亮就没了，组件也能正常跳转。
+完成如上步骤后，重新加载 `VS Code`，大概率红色高亮就没了，组件也能正常跳转。
 
-PS: 如果还不行只好去官方的[issue](https://github.com/johnsoncodehk/volar/issues/)求救了
+PS：如果还不行只好去官方的 [issue](https://github.com/johnsoncodehk/volar/issues/) 求救了
 
 </article>

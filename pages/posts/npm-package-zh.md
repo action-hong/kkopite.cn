@@ -8,7 +8,7 @@ hidden: true
 
 ## 命令行参数解析
 
-- [mri](https://www.npmjs.com/package/mri) 轻量级、速度快（功能就没下面两个库多）
+- [mri](https://www.npmjs.com/package/mri) 轻量级、速度快 (功能就没下面两个库多)
 - [`minimist`](https://www.npmjs.com/package/minimist)
 - [`yargs-parser`](https://www.npmjs.com/package/yargs-parser)
 
@@ -20,4 +20,4 @@ hidden: true
 ## TypeScript
 
 - [`arktype`](https://www.npmjs.com/package/arktype) - 运行时的数据校验
-- [`ts-morph`](https://www.npmjs.com/package/ts-morph) - 封装了`TypeScript`编译器相关的API，提供了更简单的接口来读取、修改ts代码
+- [`ts-morph`](https://www.npmjs.com/package/ts-morph) - 封装了 `TypeScript` 编译器相关的 API，提供了更简单的接口来读取、修改 ts 代码

@@ -6,11 +6,11 @@ title: kkopite
   <Plum/>
 </ClientOnly>
 
-Hey, I am kkopite
+Hey，I am kkopite
 
 
 
 ***
 
-Find me on [GitHub](https://github.com/action-hong).
+Find me on [GitHub](https://github.com/action-hong)。
 
