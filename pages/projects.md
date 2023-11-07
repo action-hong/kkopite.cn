@@ -17,8 +17,11 @@ projects:
   VS Code Extensions:
     - name: 'Show IP Address'
       link: 'https://github.com/action-hong/vscode-show-ip'
-      desc: '一款可以查看ip地址的vscode插件'
+      desc: '一款可以查看ip地址的 VS Code 插件'
       icon: 'i-iconoir-ip-address'
+    - name: 'VS Code zhlint Extension'
+      link: 'https://github.com/zhlint-project/zhlint-vscode'
+      desc: '一款zhlint的 VS Code 插件'
 ---
 
 <ListProjects :projects="frontmatter.projects"/>

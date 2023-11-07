@@ -11,6 +11,40 @@ description: 一些简短代码片段、笔记
 
 <article>
 
+_2023/11/07_
+
+## `input` 的 `type="number"` 无效
+
+写一个数字验证码的输入框如下：
+
+```html
+<input type="number" />
+```
+
+对于 ios 来说无效，而且 PC 上可以输入 `e`，`+`，`-` (因为浮点型的数字是可以由这些[组成的](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-floating-point-number))
+
+> A floating-point number consists of the following parts, in exactly the following order:
+>
+> 1. Optionally, the first character may be a "-" character.
+> 2. One or more characters in the range "0—9".
+> 3. Optionally, the following parts, in exactly the following order:
+>     1. a "." character
+>     2. one or more characters in the range "0—9"
+> 4. Optionally, the following parts, in exactly the following order:
+>     1. a "e" character or "E" character
+>     2. optionally, a "-" character or "+" character
+>     3. One or more characters in the range "0—9".
+
+而对于我们数字验证码并不需要浮点型，因此我们只能手动去监听事件，处理这些非数字的字符：
+
+```html
+<input type="text" oninput="this.value=this.value.replace(/\D/g, '')">
+```
+
+</article>
+
+<article>
+
 _2023/10/27_
 
 ## 使用 `jest` 关闭 `prettier`
