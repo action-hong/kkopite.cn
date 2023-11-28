@@ -11,6 +11,26 @@ description: 一些简短代码片段、笔记
 
 <article>
 
+_2023/11/28_
+
+## 国际化需要设置`lang`属性
+
+客户反馈日语版本上，「認」显示不对，应该是<span lang="ja" style="font-family: sans-serif">「認」</span>
+
+搜索了一下，原来还需要在标签上设置`lang="ja"`才可以，我们可以在根节点上设置：
+
+```html
+<html lang="ja">
+    xxxx
+</html>
+```
+
+> 注意：还需要确保字体支持才行，部分字体即使设置了`lang="ja"`仍然无法显示正确的日语字体
+
+</article>
+
+<article>
+
 _2023/11/07_
 
 ## `input` 的 `type="number"` 无效
