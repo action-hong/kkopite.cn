@@ -9,6 +9,20 @@ duration: 5min
 
 <article>
 
+_2023/12/19_
+
+## 自动引入时不添加分号
+
+```json
+{
+  "javascript.format.semicolons": "remove"
+}
+```
+
+</article>
+
+<article>
+
 _2023/07/19_
 
 
