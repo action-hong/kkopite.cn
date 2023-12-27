@@ -11,6 +11,33 @@ description: 一些简短代码片段、笔记
 
 <article>
 
+_2023/12/27_
+
+## `nuxt`初始模板失败
+
+使用官方提供的命令行初始化`nuxt`项目：
+
+```bash
+npx nuxi@latest init <project-name>
+```
+
+提示如下错误：
+
+```
+ERROR  Error: Failed to download template from registry: fetch failed
+```
+
+使用[该网站](https://sites.ipaddress.com/raw.githubusercontent.com/)查询`raw.githubusercontent.com`的ip地址，手动去`C://Windows/System32/drivers/etc/hosts`更新：
+
+```
+xxx.xxx.xxx.xxx raw.githubusercontent.com 
+```
+
+</article>
+
+
+<article>
+
 _2023/11/28_
 
 ## 国际化需要设置`lang`属性

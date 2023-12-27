@@ -1,5 +1,5 @@
 ---
-title: 使用vscode碰到的问题
+title: 使用vscode碰到的问题以及一些配置
 date: 2022-07-27T15:00:00.000+00:00
 lang: zh
 duration: 5min
