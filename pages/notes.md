@@ -11,6 +11,38 @@ description: 一些简短代码片段、笔记
 
 <article>
 
+_2024/01/24_
+
+## 原生js方法在react应用中填写input
+
+最近给一个网页写一个油猴脚本，自动填充表单：
+
+```js
+const input = document.querySelector('input')
+input.value = 'xxx'
+input.dispatchEvent(new Event('change', { bubbles: true }))
+```
+
+写了如上代码，发现不起作用。
+
+一番搜索，原来该网页是用`React`写的，而`React`里改写了`input.value`的set方法，因此直接`input.value = 'xxx'` 是无效的，解决方案如下：
+
+```js
+// https://stackoverflow.com/questions/23892547/what-is-the-best-way-to-trigger-change-or-input-event-in-react-js
+const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set
+nativeInputValueSetter.call(input, password)
+
+input.dispatchEvent(new Event('change', {
+  bubbles: true,
+}))
+```
+
+
+
+</article>
+
+<article>
+
 _2023/12/27_
 
 ## `nuxt`初始模板失败
