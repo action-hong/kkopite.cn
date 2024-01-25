@@ -1,11 +1,37 @@
 ---
-title: 推送浅克隆的项目到新仓库
+title: git的一些笔记
 date: 2023-07-06T16:00:00.000+00:00
 lang: zh
 duration: 5min
 tag:
   - git
 ---
+
+## git 生成和使用 patch
+
+### 创建 patch
+
+```bash
+// 表示从 commit-id这个提交算上的 n个提交的 patch
+git format-patch commit-id -n
+
+// 表示 创建 commit-id 这个提交的patch
+git format-patch commit-id -1
+```
+
+### 使用 patch
+
+```bash
+// 检查 patch 是否能正常打入
+git apply --check ./path/to/patch
+
+// 打入 patch
+git apply ./path/to/patch
+// 或者
+git am ./path/to/patch
+```
+
+## 推送浅克隆的项目到新仓库
 
 最近要将一些以前的旧项目全放到 gitlab 上，有些项目推送时发现如下问题：
 
