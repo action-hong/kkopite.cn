@@ -47,6 +47,17 @@ type LastIndexOf<T extends any[], U> =
     : -1
 ```
 
+## IndexOf
+
+```ts
+type IndexOf<T extends unknown[], U, C extends unknown[] = []> =
+  C['length'] extends T['length']
+    ? -1
+    : Equal<U, T[C['length']]> extends true
+      ? C['length']
+      : IndexOf<T, U, [...C, 0]>
+```
+
 ## Tuple To Union
 
 ```ts
@@ -137,4 +148,146 @@ type AnyOf<T extends any[]> = T[number] extends 0 | '' | false | [] | Record<str
 // https://github.com/type-challenges/type-challenges/issues/1140
 type IsUnionImpl<T, C extends T = T> = (T extends T ? C extends T ? true : unknown : never) extends true ? false : true
 type IsUnion<T> = IsUnionImpl<T>
+```
+
+## Fibonacci
+
+```ts
+type Fibonacci<T extends number, Index extends any[] = [1], Prev extends any[] = [], Curr extends any[] = [1]> =
+  Index['length'] extends T
+    ? Curr['length']
+    : Fibonacci<T, [1, ...Index], Curr, [...Prev, ...Curr]>
+```
+
+## Zip
+
+```ts
+// type exp = Zip<[1, 2], [true, false]> // expected to be [[1, true], [2, false]]
+// https://github.com/type-challenges/type-challenges/issues/5619
+type Zip<T extends any[], U extends any[], R extends any[] = []> =
+  R['length'] extends T['length'] | U['length']
+    ? R
+    : Zip<T, U, [...R, [T[R['length']], U[R['length']]]]> // 妙呀
+```
+
+## is tuple
+
+```ts
+type IsTuple<T> =
+  [T] extends [never] ? false
+    : T extends readonly any[]
+      ? number extends T['length'] // tuple的话，T['length']是个 字面量数字 这个判断就不满足了
+        ? false
+        : true
+      : false
+```
+
+## Fill
+
+```ts
+// 自己想的, 不够精简
+type Fill<
+  T extends unknown[],
+  N,
+  Start extends number = 0,
+  End extends number = T['length'],
+  R extends unknown[] = [],
+  S extends 0 | 1 = 0, // 0: unchanged ，1 fill it
+> =
+  Start extends End
+    ? T
+    : R['length'] extends T['length']
+      ? R
+      : R['length'] extends Start
+        ? Fill<T, N, Start, End, [...R, N], 1>
+        : R['length'] extends End
+          ? Fill<T, N, Start, End, [...R, T[R['length']]], 0>
+          : S extends 1
+            ? Fill<T, N, Start, End, [...R, N], 1>
+            : Fill<T, N, Start, End, [...R, T[R['length']]], 0>
+
+// 参考的答案
+type Fill<
+  T extends unknown[],
+  N,
+  Start extends number = 0,
+  End extends number = T['length'],
+  Count extends any[] = [],
+  Flag extends boolean = Count['length'] extends Start ? true : false,
+> = Count['length'] extends End
+  ? T
+  : T extends [infer R, ...infer U]
+    ? Flag extends false
+      ? [R, ...Fill<U, N, Start, End, [...Count, 0]>]
+      : [N, ...Fill<U, N, Start, End, [...Count, 0], Flag>]
+    : T
+```
+
+## Construct Tuple
+
+```ts
+type ConstructTupleUnit<L extends number | string, R extends unknown[] = []> = `${R['length']}` extends `${L}` ? R : ConstructTupleUnit<L, [unknown, ...R]>
+type X10<T extends unknown[]> = [
+  ...T,
+  ...T,
+  ...T,
+  ...T,
+  ...T,
+  ...T,
+  ...T,
+  ...T,
+  ...T,
+  ...T,
+]
+
+// pass 1000
+type ConstructTuple<L extends number | string, R extends unknown[] = []> =
+    `${L}` extends `${infer F}${infer Rest}`
+      ? ConstructTuple<Rest, [...ConstructTupleUnit<F>, ...X10<R>]>
+      : R
+```
+
+## Number Range
+
+```ts
+type CTuple<N extends number, R extends unknown[] = []> =
+  N extends R['length'] ? R : CTuple<N, [...R, unknown]>
+
+type NumberRange<L extends number, H extends number, R extends unknown[] = CTuple<L>, RES = L | H> =
+  H extends R['length']
+    ? RES
+    : NumberRange<L, H, [...R, unknown], R['length'] | RES>
+```
+
+切记不要写成如下：
+
+```ts
+type CTuple<N extends number, R extends unknown[] = []> =
+  N extends R['length'] ? R : CTuple<N, [...R, unknown]>
+
+type NumberRange<L extends number, H extends number, R extends unknown[] = CTuple<L>> =
+  H extends R['length']
+    ? H
+    : R['length'] | NumberRange<L, H, [...R, unknown]>
+```
+
+> 估计是尾部多了 `R['length']` 没法尾递归优化，导致栈溢出 (纯属猜测)
+
+## Check Repeat Char
+
+```ts
+type CheckRepeatedChars<T extends string, R extends string = ''> = // R 表示已经遍历过的
+  T extends `${infer F}${infer Rest}`
+    ? F extends R
+      ? true
+      : CheckRepeatedChars<Rest, R | F> // 更新遍历过的
+    : false
+
+// https://github.com/type-challenges/type-challenges/issues/28150
+type CheckRepeatedChars<T extends string> =
+  T extends `${infer F}${infer Rest}`
+    ? Rest extends `${string}${F}${string}` // 判断后续的有没有匹配这个 F
+      ? true
+      : CheckRepeatedChars<Rest>
+    : false
 ```
