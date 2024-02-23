@@ -19,6 +19,13 @@ export type Equal<X, Y> =
 - https://stackoverflow.com/questions/68961864/how-does-the-equals-work-in-typescript/68963796#68963796
 - https://github.com/type-challenges/type-challenges/discussions/9100
 
+## IsAny
+
+```ts
+// https://stackoverflow.com/questions/49927523/disallow-call-with-any/49928360#49928360
+export type IsAny<T> = 0 extends (1 & T) ? true : false
+```
+
 ## Last of Array
 
 ```ts
