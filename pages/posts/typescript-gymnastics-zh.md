@@ -19,6 +19,50 @@ export type Equal<X, Y> =
 - https://stackoverflow.com/questions/68961864/how-does-the-equals-work-in-typescript/68963796#68963796
 - https://github.com/type-challenges/type-challenges/discussions/9100
 
+## UnionToIntersection
+
+```ts
+type UnionToIntersection<T> =
+  (T extends any ? (arg: T) => any : never) extends (arg: infer R) => any
+    ? R
+    : never
+```
+
+核心就是函数参数的逆变
+
+`(a: 1) => any | (a: 2) => any` 能赋值给 `(a: 1 & 2) => any`，由此可以推断出交叉类型
+
+## UnionToTuple
+
+```ts
+type LastInUnion<T> =
+  UnionToIntersection<
+  T extends any ? (arg: T) => any : never
+  > extends (arg: infer R) => any
+    ? R
+    : never
+
+type UnionToTuple<T, B = LastInUnion<T>> =
+  [T] extends [never]
+    ? []
+    : [...UnionToTuple<Exclude<T, B>>, B]
+```
+
+这里的 `LastInUnion` 可以从传入的 union type 中取出最后一个类型，他的实现基于下面两点前提：
+
+1. 函数的交叉类型会形成一个重载函数，因此生成的这个重载函数的第一个参数可以是传入的 union type 中任意一个
+2. 如果需要获取重载函数的相关类型，则会取重载函数的最后一个签名
+
+参见实验 [playground](https://www.typescriptlang.org/play?#code/PTAEhK5RJ5Ubx9Gj1QjfUAhGhZxML7xhfxUA6mBYAUAFwE8AHAU1ADEBGUAXlAAoBDALlADsBXAWwCNSATgEo6APlBN2hPETKUATHUatQAZ3wCAluwDmI2uMnSCJchQDMS6qABkCvHgAmpAMYAbJgPIA3T6ABmAPaBbBYOuEGBDFRCeJEMAOQAFqRuboEJQkA)
+
+
+## IsAny
+
+```ts
+// https://stackoverflow.com/questions/49927523/disallow-call-with-any/49928360#49928360
+export type IsAny<T> = 0 extends (1 & T) ? true : false
+```
+
 ## Last of Array
 
 ```ts
@@ -290,4 +334,69 @@ type CheckRepeatedChars<T extends string> =
       ? true
       : CheckRepeatedChars<Rest>
     : false
+```
+
+## Class Public Key
+
+
+```ts
+// https://github.com/type-challenges/type-challenges/issues/21570
+type ClassPublicKeys<A> = keyof A
+```
+
+## ObjectFromEntries
+
+```ts
+// 自己写的，写复杂了
+type ObjectFromEntries<T> = Debug<UnionToIntersection<T extends [infer K extends string, infer V] ? { [P in K]: V } : never>>
+
+// https://github.com/type-challenges/type-challenges/issues/3382
+type ObjectFromEntries<E extends [string, unknown]> = { // 秒呀
+  [K in E as K[0]]: K[1]
+}
+```
+
+## IsPalindrome
+
+```ts
+type Reverse<T extends string, R extends string = ''> =
+  T extends `${infer H}${infer Rest}`
+    ? Reverse<Rest, `${H}${R}`>
+    : R
+type IsPalindrome<T extends string | number, S extends string = `${T}`> = S extends Reverse<S> ? true : false
+
+// https://github.com/type-challenges/type-challenges/issues/4093
+type IsPalindrome<T extends string | number, K = `${T}`> =
+  K extends `${infer L}${infer R}` ?
+    R extends '' ? true : // 判断为单个字符，那必然回文
+      K extends `${L}${infer S}${L}` ? IsPalindrome<S> : false // 判断头尾相同, 进入下一个检查
+    : true
+```
+
+## Binary To Decimal
+
+```ts
+// 从右向左，复杂了
+type Reverse<T extends string> = T extends `${infer F}${infer R}` ? `${Reverse<R>}${F}` : ''
+
+type BinaryToDecimal<
+  S extends string,
+  T extends string = Reverse<S>,
+  Index extends any[] = [1], // 1, 2, 4, 8, ...
+  Acc extends any[] = []> = // Acc 为累加
+    T extends `${infer F}${infer R}`
+      ? F extends '0'
+        ? BinaryToDecimal<S, R, [...Index, ...Index], Acc> // Index * 2 进位
+        : BinaryToDecimal<S, R, [...Index, ...Index], [...Index, ...Acc]>
+      : Acc['length']
+
+// https://github.com/type-challenges/type-challenges/issues/6349
+// 从左向右算 累加乘2，碰到1就加1
+type BinaryToDecimal<
+  S extends string,
+  R extends any[] = [],
+> =
+  S extends `${infer F}${infer L}`?
+    F extends '0'? BinaryToDecimal<L, [...R, ...R]>:BinaryToDecimal<L, [...R, ...R, 1]> // 从左到右算好像更快？不断乘2，碰到有1的就加上1
+    :R['length']
 ```
