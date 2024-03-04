@@ -372,3 +372,31 @@ type IsPalindrome<T extends string | number, K = `${T}`> =
       K extends `${L}${infer S}${L}` ? IsPalindrome<S> : false // 判断头尾相同, 进入下一个检查
     : true
 ```
+
+## Binary To Decimal
+
+```ts
+// 从右向左，复杂了
+type Reverse<T extends string> = T extends `${infer F}${infer R}` ? `${Reverse<R>}${F}` : ''
+
+type BinaryToDecimal<
+  S extends string,
+  T extends string = Reverse<S>,
+  Index extends any[] = [1], // 1, 2, 4, 8, ...
+  Acc extends any[] = []> = // Acc 为累加
+    T extends `${infer F}${infer R}`
+      ? F extends '0'
+        ? BinaryToDecimal<S, R, [...Index, ...Index], Acc> // Index * 2 进位
+        : BinaryToDecimal<S, R, [...Index, ...Index], [...Index, ...Acc]>
+      : Acc['length']
+
+// https://github.com/type-challenges/type-challenges/issues/6349
+// 从左向右算 累加乘2，碰到1就加1
+type BinaryToDecimal<
+  S extends string,
+  R extends any[] = [],
+> =
+  S extends `${infer F}${infer L}`?
+    F extends '0'? BinaryToDecimal<L, [...R, ...R]>:BinaryToDecimal<L, [...R, ...R, 1]> // 从左到右算好像更快？不断乘2，碰到有1的就加上1
+    :R['length']
+```
