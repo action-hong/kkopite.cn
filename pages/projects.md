@@ -22,6 +22,12 @@ projects:
     - name: 'VS Code zhlint Extension'
       link: 'https://github.com/zhlint-project/zhlint-vscode'
       desc: '一款zhlint的 VS Code 插件'
+    - name: 'VS Code Tip'
+      link: 'https://github.com/action-hong/vscode-tip'
+      desc: '使用 corn 配置定时提醒，提醒喝水等等'
+    - name: 'i18n kk'
+      link: 'https://github.com/action-hong/i18n-ally'
+      desc: '基于 i18n ally 添加可配置术语表功能' 
 ---
 
 <ListProjects :projects="frontmatter.projects"/>
