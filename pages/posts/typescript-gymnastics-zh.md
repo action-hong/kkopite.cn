@@ -470,3 +470,112 @@ type Slice<Arr extends unknown[], Start extends number = 0, End extends number =
     ? Rest
     : []
 ```
+
+## Currying
+
+```ts
+// P2表示前面攒起来的参数
+// Flag 表示在没有任何参数列表时 是否返回一个 函数，还是立即返回结果
+// & 用于函数时，会生成重载函数，因此这里使用 “&” 而非 “|”
+type _Currying<P extends any[], R, P2 extends any[] = [], Flag extends boolean = true> =
+  P extends [infer F, ...infer Rest]
+    ? ((...args: [...P2, F]) => _Currying<Rest, R, [], false>) // 用上当前的参数F
+    & _Currying<Rest, R, [...P2, F], false>
+    : Flag extends true ? (...args: P2) => R : R
+
+// 优化，无需 Flag
+// 参考了 https://github.com/type-challenges/type-challenges/issues/3697 的方法
+type _Currying<P extends any[], R, P2 extends any[] = []> =
+  P extends [infer F, ...infer Rest]
+    ? ((...args: [...P2, F]) => Rest['length'] extends 0 ? R : _Currying<Rest, R, []>) // 用上当前的参数F
+    & _Currying<Rest, R, [...P2, F]>
+    : (...args: P2) => R
+
+/* _____________ 你的代码 _____________ */
+type Currying<F extends (...args: any[]) => any> =
+  F extends (...args: infer Rest) => infer Result
+    ? _Currying<Rest, Result>
+    : never
+
+declare function DynamicParamsCurrying<F extends (...args: any[]) => any>(fn: F): Currying<F>
+```
+
+更好的方法：
+
+```ts
+// https://github.com/type-challenges/type-challenges/issues/3697
+type Curry<A, R, D extends unknown[] = []> =
+    A extends [infer H, ...infer T]
+      ? T extends [] // 这里剩一个参数时，就直接返回结果，没必要再调用一层了，避免上诉方法还用到 flag
+        ? (...args: [...D, H]) => R
+        : ((...args: [...D, H]) => Curry<T, R>) & Curry<T, R, [...D, H]>
+      : () => R
+
+declare function DynamicParamsCurrying<A extends unknown[], R>(fn: (...args: A) => R): Curry<A, R>
+```
+
+## Sum
+
+思路：
+
+1. 两个数相加应该是按照从右到左，个位数加起来，但是 TS 的推断中只能截取字符串的第1个，因为首先我们先将要加的数翻转，然后从左到右相加
+2. 每一位要相加的2个数，还要加上上一位的进位 `AddReturn`，结果必然是小于 `20`，因此继续拆分结果的个位数 `V` 去和前面的结果 `Acc` 拼接 `${V}${Acc}`，然后把进位 `Carry` 传到下一位的相加运算中
+3. 递归过程中，某个数已经遍历完了，这时候 `A` 还没遍历完，先判断还有没有进位 `1`，有的话让 `A` 和 `1` 去相加，反之拼接返回 `${Reverse<A>}${Acc}` (注意这里原来 A 进来是翻转的，所以这里要再翻转一次，才能得到正确的结果)，例如：
+
+```
+A: '1234', B: '1', Acc: ''
+
+进行翻转
+A: '4321', B: '1', Acc: ''
+
+第一位相加
+
+A: '321', B: '', Acc: '5'
+
+B没有内容了，A翻转与Acc拼接
+
+A: '123', Acc: '5' => '1235' 
+```
+
+```ts
+type NArray<S extends string, N extends number = StringToNumber<S>, Acc extends any[] = []> =
+  N extends Acc['length'] ? Acc : NArray<S, N, [...Acc, 0]>
+
+type StringToNumber<S extends string> = S extends `${infer N extends number}` ? N : 0
+
+// 3 number add
+type Add<A extends string, B extends string, Carry extends string> = [...NArray<A>, ...NArray<B>, ...NArray<Carry>]['length']
+
+// 3 digit number add , get { singleDigit, carry }
+type AddReturn<A extends string, B extends string, Carry extends string, R = Add<A, B, Carry>> =
+  R extends number ?
+  `${R}` extends `1${infer N extends number}`
+    ? {
+      singleDigit: N
+      carry: '1'
+    }
+    : {
+      singleDigit: R
+      carry: '0'
+    }
+    : never
+
+type Reverse<S extends string, R extends string = ''> =
+    S extends `${infer F}${infer Rest}`
+      ? Reverse<Rest, `${F}${R}`>
+      : R
+
+type _Sum<A extends string, B extends string, Acc extends string = '', Carry extends '0' | '1' = '0' > =
+    A extends `${infer HA extends string}${infer TA}`
+      ? B extends `${infer HB extends string}${infer TB}`
+        ? AddReturn<HA, HB, Carry> extends {
+          singleDigit: infer V extends number
+          carry: infer N extends '0' | '1'
+        }
+          ? _Sum<TA, TB, `${V}${Acc}`, N> // Acc behind V，
+          : never //
+        : Carry extends '1' ? _Sum<A, '1', Acc, '0'> : `${Reverse<A>}${Acc}` // reverse A
+      : Carry extends '1' ? _Sum<B, '1', Acc, '0'> : `${Reverse<B>}${Acc}` // revere B
+
+type Sum<A extends string | number | bigint, B extends string | number | bigint> = _Sum<Reverse<`${A}`>, Reverse<`${B}`>>
+```
