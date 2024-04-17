@@ -400,3 +400,73 @@ type BinaryToDecimal<
     F extends '0'? BinaryToDecimal<L, [...R, ...R]>:BinaryToDecimal<L, [...R, ...R, 1]> // 从左到右算好像更快？不断乘2，碰到有1的就加上1
     :R['length']
 ```
+
+## Slice
+
+```ts
+type NArray<N extends number, R extends any[] = []> =
+  N extends R['length']
+    ? R
+    : NArray<N, [...R, 1]>
+
+type Minus<A extends number, B extends number> =
+  NArray<A> extends [...NArray<B>, ...infer Rest]
+    ? Rest['length']
+    : -1
+
+type NegativeToPositive<N extends number, L extends number> =
+  `${N}` extends `-${infer NN extends number}`
+    ? Minus<L, NN> // 负数 + L, 有局限性
+    : N
+
+type Slice<
+  Arr extends any[],
+  _Start extends number = 0,
+  _End extends number = Arr['length'],
+  // 保证是正数
+  Start extends number = NegativeToPositive<_Start, Arr['length']>,
+  End extends number = NegativeToPositive<_End, Arr['length']>,
+  Acc1 extends any[] = [],
+  Acc2 extends any[] = [],
+  R extends any[] = [],
+> =
+  Minus<End, Start> extends -1 ? R // End 小于 Start
+    : Start extends End
+      ? R
+      : Arr extends [infer F, ...infer Rest]
+        ? Start extends Acc1['length'] // 到了
+          ? End extends Acc2['length'] // 结束
+            ? R
+            : Slice<Rest, _Start, _End, Start, End, Acc1, [...Acc2, 0], [...R, F]> // 开始添加
+          : Slice<Rest, _Start, _End, Start, End, [...Acc1, 0], [...Acc2, 0], R>
+        : R
+```
+
+思路就是 2 点：
+
+1. 正数转为负数
+2. 计算跳过前面 start 个，开始加入，到 end 时候停
+
+看别人的答案，更为巧妙：
+
+```ts
+// https://github.com/type-challenges/type-challenges/issues/22110
+// N 如果是负的，转换为 正确的正数位置
+type ToPositive<N extends number, Arr extends unknown[]> =
+  `${N}` extends `-${infer P extends number}`
+    ? Slice<Arr, P>['length'] // 秒呀，假设数组长度 4，输入-1，则slice(1)的数组长度为3，刚好就是对应的正确的正数位置
+    : N
+
+// get the initial N items of Arr
+// 等价 array.slice(0, n)
+type InitialN<Arr extends unknown[], N extends number, _Acc extends unknown[] = []> =
+  _Acc['length'] extends N | Arr['length']
+    ? _Acc
+    : InitialN<Arr, N, [..._Acc, Arr[_Acc['length']]]>
+
+// 得出 [0, end) 和 [0, start) infer 出 [start, end)
+type Slice<Arr extends unknown[], Start extends number = 0, End extends number = Arr['length']> =
+  InitialN<Arr, ToPositive<End, Arr>> extends [...InitialN<Arr, ToPositive<Start, Arr>>, ...infer Rest]
+    ? Rest
+    : []
+```
