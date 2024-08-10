@@ -17,11 +17,20 @@ projects:
   VS Code Extensions:
     - name: 'Show IP Address'
       link: 'https://github.com/action-hong/vscode-show-ip'
-      desc: '一款可以查看ip地址的 VS Code 插件'
+      desc: '一款可以查看 ip 地址的 VS Code 插件'
       icon: 'i-iconoir-ip-address'
     - name: 'VS Code zhlint Extension'
+      icon: 'i-icon-park-outline:chinese'
       link: 'https://github.com/zhlint-project/zhlint-vscode'
-      desc: '一款zhlint的 VS Code 插件'
+      desc: 'zhlint 的 VS Code 插件'
+    - name: 'VS Code Tip'
+      icon: 'i-icon-park-outline:tips-one'
+      link: 'https://github.com/action-hong/vscode-tip'
+      desc: '使用 corn 配置定时提醒'
+    - name: 'i18n kk'
+      icon: 'i-ion-language'
+      link: 'https://github.com/action-hong/i18n-ally'
+      desc: '基于 i18n ally 添加可配置术语表功能' 
 ---
 
 <ListProjects :projects="frontmatter.projects"/>

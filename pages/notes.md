@@ -11,6 +11,22 @@ description: 一些简短代码片段、笔记
 
 <article>
 
+_2024/03/01_
+
+## VS Code 的 node 模块没有提示
+
+很诡异的问题，某个项目里使用`nodejs`的内置模块没有任何提示，似乎是自动安装时出了问题，
+
+尝试手动安装类型包就可以了：
+
+```bash
+pnpm add @types/node
+```
+
+</article>
+
+<article>
+
 _2024/01/24_
 
 ## 原生js方法在react应用中填写input

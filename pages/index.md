@@ -1,13 +1,12 @@
 ---
-title: kkopite
+title: kkopite | 记录个人的工作和生活
 ---
 
 <ClientOnly>
   <Plum/>
 </ClientOnly>
 
-Hey，I am kkopite
-
+欢迎您！这里是 kkopite 的一些日常记录
 
 
 ***
