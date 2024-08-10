@@ -291,3 +291,79 @@ type CheckRepeatedChars<T extends string> =
       : CheckRepeatedChars<Rest>
     : false
 ```
+
+## Integer
+
+```ts
+type Integer<T extends number> =
+  number extends T
+    ? never
+    : `${T}` extends `${string}.${string}`
+      ? never
+      : T
+
+// 关键点
+type A<T extends number> = `${T}`
+type a = A<1.0> // '1'
+```
+
+## To Primitive
+
+```ts
+// https://github.com/type-challenges/type-challenges/issues/22057
+type ToPrimitive<T> = T extends object ? (
+  T extends (...args: never[]) => unknown ? Function : {
+    [Key in keyof T]: ToPrimitive<T[Key]>
+  }
+) : (
+  T extends { valueOf: () => infer P } ? P : T
+)
+```
+
+## Permutations Of Tuple
+
+```ts
+// 每个位置都插一个
+type InserAllPosition<T extends any[], U, Pre extends any[] = [], R = never>
+  = T extends [infer F, ...infer Rest]
+    ? InserAllPosition<Rest, U, [...Pre, F], R | [...Pre, U, ...T]>
+    : R | [...Pre, U]
+
+// 递归的思路，在上一个的全排列的基础上，每一个位置插入一个新的项，就得到新的排列
+type PermutationsOfTuple<T extends any[]> =
+  T extends [infer F, ...infer Rest]
+    ? InserAllPosition<PermutationsOfTuple<Rest>, F>
+    : []
+```
+
+## Transpose
+
+```ts
+// 自己想的，想得太复杂了
+type Add<T extends number[], M extends number[][], R extends number[][] = []> = 
+  R['length'] extends T['length']
+    ? R
+    : Add<T, M, [...R, [T[R['length']], ...M[R['length']]]]>
+
+type Tuple<N extends number, R extends number[][] = []> =
+  R['length'] extends N
+    ? R
+    : Tuple<N, [...R, []]>
+
+type Transpose2<M extends number[][]> = 
+  M extends [] 
+    ? []
+    : M['length'] extends 1
+      ? Add<M[0], Tuple<M[0]['length']>>
+      : M extends [infer F extends number[], ...infer Rest extends number[][]]
+        ? Add<F, Transpose2<Rest>>
+        : never
+
+// 解答里看到的
+// https://github.com/type-challenges/type-challenges/issues/25297
+type Transpose<M extends number[][],R = M['length'] extends 0?[]:M[0]> = {
+  [X in keyof R]:{ // x 列序号 Y 行的序号
+    [Y in keyof M]:X extends keyof M[Y]?M[Y][X]:never //
+  }
+}
+```
