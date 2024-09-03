@@ -7,6 +7,21 @@ tag:
   - git
 ---
 
+
+## 常用指令
+
+```bash
+// 删除本地分支
+git branch -d <branch-name>
+
+// 删除远程分支
+git push origin --delete <branch-name>
+
+// 生成最近一次提交的patch
+git format-patch -1 HEAD
+
+```
+
 ## git 生成和使用 patch
 
 ### 创建 patch
